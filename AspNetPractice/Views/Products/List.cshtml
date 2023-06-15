@@ -1,0 +1,43 @@
+﻿@model ProductListViewModel
+
+<div class="row mt-5">
+    @foreach(var p in Model.Products)
+    {
+        <div class="col-sm-6 col-md-4">
+            <div class="d-flex flex-column justify-content-between h-100">
+                <div>
+                    <img class="img-fluid" src="@p.ImageUrl" />
+                    <div class="d-flex justify-content-between">
+                        <h3 class="product-name">@p.Name</h3>
+                        <h4 class="product-price">@p.Price.ToString("c")</h4>
+                    </div>
+                    @if(p.Description != null)
+                    {
+                        <p>
+                            @(p.Description.Length <= 50 ? 
+                            p.Description : 
+                            p.Description.Substring(0, 50).Trim()+"...")
+                        </p>
+                    }
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <a class="btn btn-primary w-100" asp-controller="Products" asp-action="Details" asp-route-id="@p.Id">
+                            Details
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-outline-secondary w-100" asp-controller="Products" asp-action="Upsert" asp-route-id="@p.Id">
+                            Edit
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-outline-danger w-100" asp-controller="Products" asp-action="Details" asp-route-id="@p.Id">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

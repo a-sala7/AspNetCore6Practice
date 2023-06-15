@@ -1,0 +1,50 @@
+﻿@model UpsertProductViewModel
+
+@{
+    var selectItems = new List<SelectListItem>();
+    foreach(var c in Model.Categories)
+    {
+        selectItems.Add(new() { Value = c.Key.ToString(), Text = c.Value });
+    }
+}
+
+<div class="row mt-5">
+    <div class="offset-lg-3 col-lg-6">
+        <form method="POST" role="form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <div class="">
+                    <input asp-for="Product.Name" class="form-control" />
+                    <span asp-validation-for="Product.Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.Description" class="control-label"></label>
+                <div class="">
+                    <input asp-for="Product.Description" class="form-control" />
+                    <span asp-validation-for="Product.Description" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.Price" class="control-label"></label>
+                <div class="">
+                    <input asp-for="Product.Price" class="form-control" />
+                    <span asp-validation-for="Product.Price" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.CategoryId" class="control-label"></label>
+                <div>
+                    <select asp-for="Product.CategoryId" asp-items="selectItems"></select>
+                    <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+</div>

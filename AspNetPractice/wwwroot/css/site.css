@@ -1,0 +1,17 @@
+﻿body {
+    font-family: "Segoe UI", sans-serif;
+}
+
+.product-name {
+    font-weight: normal;
+    font-size: 1.2rem;
+}
+
+.product-price {
+    font-size: 1.2rem;
+}
+
+.product-details .product-name,
+.product-details .product-price {
+    font-weight: bold;
+}

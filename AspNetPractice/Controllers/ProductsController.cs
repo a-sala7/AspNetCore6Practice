@@ -89,5 +89,17 @@ namespace AspNetPractice.Controllers
             }
             return RedirectToAction("List");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            Product? p = await _productRepository.GetById(id);
+            if(p is null)
+            {
+                return RedirectToAction("List");
+            }
+            await _productRepository.Delete(p);
+            return RedirectToAction("List");
+        }
     }
 }

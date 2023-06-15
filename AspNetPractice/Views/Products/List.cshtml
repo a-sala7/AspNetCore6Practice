@@ -1,6 +1,13 @@
 ﻿@model ProductListViewModel
 
-<div class="row mt-5">
+<div class="d-flex mt-4 justify-content-between align-items-center">
+    <h1>Products</h1>
+    <a asp-controller="Products" asp-action="Upsert" class="btn btn-success">
+        Add New Product
+    </a>
+</div>
+
+<div class="row mt-4">
     @foreach(var p in Model.Products)
     {
         <div class="col-sm-6 col-md-4">
@@ -32,9 +39,30 @@
                         </a>
                     </div>
                     <div class="col-4">
-                        <a class="btn btn-outline-danger w-100" asp-controller="Products" asp-action="Details" asp-route-id="@p.Id">
+                        <button type="button" class="btn btn-outline-danger w-100" data-bs-toggle="modal" data-bs-target="#deleteProductModal_@p.Id">
                             Delete
-                        </a>
+                        </button>
+
+                        <div class="modal fade" id="deleteProductModal_@p.Id" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5">Confirmation</h1>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete the following product?
+                                        <br/>
+                                        (ID: @p.Id) @p.Name
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
+                                        <form method="POST" asp-action="Delete" asp-route-id="@p.Id">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
